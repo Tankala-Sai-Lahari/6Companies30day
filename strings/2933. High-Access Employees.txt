@@ -1,0 +1,16 @@
+def findHighAccessEmployees(self, access_times: List[List[str]]) -> List[str]:
+        d={}
+        for l in access_times:   #sepaerate each employee login times
+            if l[0] not in d:
+                d[l[0]]=[l[1]]
+            else:
+                d[l[0]].append(l[1])
+        res=[]
+        for key in d:       #calculate the employees having 3 logins in one hour
+            val=d[key]
+            val.sort()
+            for i in range(0,len(val)-2):
+                if (int(val[i+2])-int(val[i]))<100:
+                    res.append(key)
+                    break
+        return res
